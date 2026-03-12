@@ -95,14 +95,21 @@ cd ../../../
 
 
 ### my stuff ###
+rm *.zip
 echo "downloading sqlite3 amalgamation from: $sqliteUrl"
-$WGET "$sqliteUrl"
-mkdir -p build
-unzip -oq *.zip -d build
+$WGET "$sqliteUrl" || exit 1
+unzip -oqq *.zip || exit 1
+mv sqlite* build >/dev/null 2>&1 || mv *amalgamation* build >/dev/null 2>&1 
+
+[ -e build ] || exit 1
+
+mkdir -p sqlite-build
+mv build sqlite-build/ >/dev/null 2>&1 || exit 1
+
+cd sqlite-build
 
 export NDK_PROJECT_PATH=$(pwd)
 
 echo "curr dir : $NDK_PROJECT_PATH"
 
-find . -maxdepth 1
-find build
+find .
