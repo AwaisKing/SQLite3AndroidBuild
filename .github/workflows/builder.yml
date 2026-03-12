@@ -37,6 +37,6 @@ jobs:
           rm *.zip
           mv * build
 
-      - name: [test] list files
+      - name: \[test\] list files
         run: |
           find .
