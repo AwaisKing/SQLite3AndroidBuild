@@ -30,6 +30,13 @@ jobs:
 
       - name: download sqlite3 amalgamation
         run: |
-          echo "sqliteUrl: ${{ steps.sqliteUrl.outputs.sqliteUrl }}"
-          # curl -O "${{ steps.sqliteUrl.outputs.sqliteUrl }}"
+          set +e
+          echo "downloading sqlite3 amalgamation from: ${{ steps.sqliteUrl.outputs.sqliteUrl }}"
+          curl -L -O "${{ steps.sqliteUrl.outputs.sqliteUrl }}"
+          unzip -oq *.zip
+          rm *.zip
+          mv * build
 
+      - name: [test] list files
+        run: |
+          find .
