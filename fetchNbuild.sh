@@ -104,4 +104,4 @@ export NDK_PROJECT_PATH=$(pwd)
 
 echo "curr dir : $NDK_PROJECT_PATH"
 
-find .
+find . -maxdepth 1
