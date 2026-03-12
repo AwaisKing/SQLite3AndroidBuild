@@ -10,33 +10,25 @@ jobs:
   fetch-sqlite:
     runs-on: ubuntu-latest
     steps:
-      - name: scrape and fetch latest sqlite amalgamation link
-        id: sqliteUrl
-        run: |
-          content=$(curl -sSL 'https://www.sqlite.org')
-          regex='PRODUCT,([^,]+),([0-9]{4})\/([^,]+amalgamation[^,]+)'
-          
-          if [[ $content =~ $regex ]]; then
-              version="${BASH_REMATCH[1]}"
-              year="${BASH_REMATCH[2]}"
-              path="${BASH_REMATCH[3]}"
-              [[ "$path" != *.zip ]] && path="${path}.zip"
-              sqliteUrl="https://www.sqlite.org/${year}/${path}"
-          else
-              sqliteUrl="https://www.sqlite.org/2026/sqlite-amalgamation-3520000.zip"
-          fi
-          
-          echo "sqliteUrl=$sqliteUrl" >> $GITHUB_OUTPUT
+      - name: Checkout Builder Source Code
+        uses: actions/checkout@v4
+        with:
+          repository: AwaisKing/SQLite3AndroidBuild
+          path: sqlite_source
 
-      - name: download sqlite3 amalgamation
-        run: |
-          set +e
-          echo "downloading sqlite3 amalgamation from: ${{ steps.sqliteUrl.outputs.sqliteUrl }}"
-          curl -L -O "${{ steps.sqliteUrl.outputs.sqliteUrl }}"
-          unzip -oq *.zip
-          rm *.zip
-          mv * build
+      - name: Set up Java Development Kit (JDK)
+        uses: actions/setup-java@v5.2.0
+        with:
+          distribution: 'graalvm'
+          java-version: '21'
 
-      - name: \[test\] list files
+      - name: Install dependencies
+        run: sudo apt update && sudo apt install -yq php php-cli gperf g++ git perl make unzip wget sed
+
+      - name: Fetch Android SDK
+        working-directory: sqlite_source/example/android
         run: |
-          find .
+          ./fetchNbuild.sh
+          ANDROID_SDK_HOME="$ANDROID_SDK_ROOT"
+          ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
+          
