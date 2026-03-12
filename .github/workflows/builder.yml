@@ -28,6 +28,7 @@ jobs:
       - name: Fetch Android SDK
         working-directory: sqlite_source
         run: |
+          chmod 755 ./fetchNbuild.sh
           ./fetchNbuild.sh
           ANDROID_SDK_HOME="$ANDROID_SDK_ROOT"
           ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
