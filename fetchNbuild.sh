@@ -102,10 +102,11 @@ rm *.zip >/dev/null 2>&1
 echo "downloading sqlite3 amalgamation from: $sqliteUrl"
 $WGET "$sqliteUrl" || exit 1
 
-[ -e sqlite-build ] || mkdir -p sqlite-build
 unzip -qq "${sqliteUrl##*/}" || exit 1
 mv sqlite* sqlite-build >/dev/null 2>&1 || mv *amalgamation* sqlite-build >/dev/null 2>&1
 [ -e sqlite-build ] || exit 1
+
+mv sqlite-build build/
 
 rm *.zip >/dev/null 2>&1
 
