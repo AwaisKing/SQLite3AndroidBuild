@@ -133,3 +133,12 @@ echo "ANDROID_NDK_ROOT : $ANDROID_NDK_ROOT"
 echo "NDK_PROJECT_PATH : $NDK_PROJECT_PATH"
 
 ndk-build
+
+cd objs
+find . -type d -delete >/dev/null 2>&1
+mv local bins
+mv bins ../
+cd ..
+
+tar czf shared_libs.tar libs
+tar czf binaries.tar bins
