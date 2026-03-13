@@ -95,7 +95,7 @@ cd ../../../
 
 
 ### my stuff ###
-rm *.zip
+rm *.zip >/dev/null 2>&1
 echo "downloading sqlite3 amalgamation from: $sqliteUrl"
 $WGET "$sqliteUrl" || exit 1
 unzip -oqq *.zip || exit 1
