@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set +e
+set +e
 
 content=$(curl -sSL 'https://www.sqlite.org/download.html')
 regex='PRODUCT,([^,]+),([0-9]{4})\/([^,]+amalgamation[^,]+)'
@@ -89,7 +89,7 @@ mv cmdline-tools/* cmdline-tools/latest/ || exit 1
 echo "Installing required SDK tools..."
 cd cmdline-tools/latest/bin/ || exit 1
 yes | $SDKMANAGER --licenses >/dev/null || exit 1
-$SDKMANAGER --install "ndk;$ANDROID_NDK_VERSION" "cmake;$CMAKE_VERSION" "build-tools;$BUILD_TOOLS_VERSION" "platforms;android-36" > /dev/null || exit 1
+$SDKMANAGER --install "ndk;$ANDROID_NDK_VERSION" "cmake;$CMAKE_VERSION" "build-tools;$BUILD_TOOLS_VERSION" "platforms;android-35" > /dev/null || exit 1
 
 cd ../../../
 
@@ -113,7 +113,7 @@ cd build
 export NDK_PROJECT_PATH=$(pwd)
 export ANDROID_SDK_HOME="$ANDROID_SDK_ROOT"
 export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
-export PATH="$ANDROID_NDK_ROOT:$PATH"
+export PATH="$ANDROID_NDK_ROOT:$ANDROID_SDK_ROOT:$PATH"
 
 echo "curr dir : $NDK_PROJECT_PATH"
 
