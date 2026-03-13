@@ -31,18 +31,18 @@ jobs:
           chmod 755 ./fetchNbuild.sh
           ./fetchNbuild.sh
 
-      # - name: Upload Compiled Binaries
-        # uses: actions/upload-artifact@v4
-        # with:
-          # name: sqlite-bins
-          # path: |
-           # /home/runner/work/SQLite3AndroidBuild/SQLite3AndroidBuild/sqlite_source/build/binaries.tar
-          # retention-days: 7
+      - name: Upload Shared Libraries
+        uses: actions/upload-artifact@v4
+        with:
+          name: sqlite-libs
+          path: |
+           /home/runner/work/SQLite3AndroidBuild/SQLite3AndroidBuild/sqlite_source/build/shared_libs.tar
+          retention-days: 7
 
-      # - name: Upload Shared Libraries
-        # uses: actions/upload-artifact@v4
-        # with:
-          # name: sqlite-libs
-          # path: |
-           # /home/runner/work/SQLite3AndroidBuild/SQLite3AndroidBuild/sqlite_source/build/shared_libs.tar
-          # retention-days: 7
+      - name: Upload Compiled Binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: sqlite-bins
+          path: |
+           /home/runner/work/SQLite3AndroidBuild/SQLite3AndroidBuild/sqlite_source/build/binaries.tar
+          retention-days: 7
