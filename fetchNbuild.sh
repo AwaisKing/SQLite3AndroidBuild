@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set +e
+# set +e
 
 content=$(curl -sSL 'https://www.sqlite.org/download.html')
 regex='PRODUCT,([^,]+),([0-9]{4})\/([^,]+amalgamation[^,]+)'
