@@ -105,6 +105,13 @@ yes | $SDKMANAGER --install "platforms;android-35" > /dev/null || exit 1
 cd ../../../
 
 
+echo "-------------- debug -------------------"
+echo "curr dir : $(pwd)"
+ls
+echo "list .."
+ls ..
+echo "-------------- debug -------------------"
+
 ##################### my stuff #####################
 rm *.zip >/dev/null 2>&1
 
