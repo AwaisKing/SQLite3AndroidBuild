@@ -134,11 +134,13 @@ echo "NDK_PROJECT_PATH : $NDK_PROJECT_PATH"
 
 ndk-build
 
-cd objs
-find . -type d -delete >/dev/null 2>&1
-mv local bins
-mv bins ../
-cd ..
+find . -maxdepth 3 -type f
 
-tar czf shared_libs.tar libs
-tar czf binaries.tar bins
+# cd objs
+# find . -type d -delete >/dev/null 2>&1
+# mv local bins
+# mv bins ../
+# cd ..
+
+# tar czf shared_libs.tar libs
+# tar czf binaries.tar bins
