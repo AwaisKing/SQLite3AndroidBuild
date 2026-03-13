@@ -16,14 +16,14 @@ jobs:
           repository: AwaisKing/SQLite3AndroidBuild
           path: sqlite_source
 
-      - name: Set up Java Development Kit (JDK)
-        uses: actions/setup-java@v5.2.0
-        with:
-          distribution: 'graalvm'
-          java-version: '21'
+      # - name: Set up Java Development Kit (JDK)
+        # uses: actions/setup-java@v5.2.0
+        # with:
+          # distribution: 'graalvm'
+          # java-version: '21'
 
-      - name: Install dependencies
-        run: sudo apt update && sudo apt install -yq php php-cli gperf g++ git perl make unzip wget sed
+      # - name: Install dependencies
+        # run: sudo apt update && sudo apt install -yq php php-cli gperf g++ git perl make unzip wget sed
 
       - name: Run Builder Script
         working-directory: sqlite_source
