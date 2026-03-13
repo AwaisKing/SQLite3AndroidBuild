@@ -105,6 +105,11 @@ yes | $SDKMANAGER --install "platforms;android-35" > /dev/null || exit 1
 cd ../../../../
 
 
+export ANDROID_SDK_HOME="$(pwd)/$ANDROID_SDK_ROOT"
+export ANDROID_NDK_ROOT="$ANDROID_SDK_HOME/ndk/$ANDROID_NDK_VERSION"
+export PATH="$ANDROID_NDK_ROOT:$ANDROID_SDK_HOME:$PATH"
+
+
 ##################### my stuff #####################
 rm *.zip >/dev/null 2>&1
 
@@ -122,10 +127,9 @@ mv sqlite-build build
 cd build
 
 export NDK_PROJECT_PATH=$(pwd)
-export ANDROID_SDK_HOME="$ANDROID_SDK_ROOT"
-export ANDROID_NDK_ROOT="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK_VERSION"
-export PATH="$ANDROID_NDK_ROOT:$ANDROID_SDK_ROOT:$PATH"
 
-echo "curr dir : $NDK_PROJECT_PATH"
+echo "ANDROID_SDK_HOME : $ANDROID_SDK_HOME"
+echo "ANDROID_NDK_ROOT : $ANDROID_NDK_ROOT"
+echo "NDK_PROJECT_PATH : $NDK_PROJECT_PATH"
 
 ndk-build
