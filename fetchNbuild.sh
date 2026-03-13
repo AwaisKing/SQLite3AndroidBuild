@@ -104,7 +104,7 @@ $WGET "$sqliteUrl" || exit 1
 unzip -qq "${sqliteUrl##*/}" -d sqlite-build || exit 1
 [ -e sqlite-build ] || exit 1
 rm *.zip >/dev/null 2>&1
-cd sqlite-build
+# cd sqlite-build
 
 mv sqlite* build >/dev/null 2>&1 || mv *amalgamation* build >/dev/null 2>&1
 [ -e build ] || exit 1

@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt update && sudo apt install -yq php php-cli gperf g++ git perl make unzip wget sed
 
-      - name: Fetch Android SDK
+      - name: Run Builder Script
         working-directory: sqlite_source
         run: |
           chmod 755 ./fetchNbuild.sh
