@@ -77,29 +77,29 @@ if ! java --help >/dev/null 2>&1 ; then
   exit 1
 fi
 
-echo "Downloading SDK Manager..."
-mkdir -p "$ANDROID_SDK_ROOT" || exit 1
-cd "$ANDROID_SDK_ROOT" || exit 1
-$WGET "https://dl.google.com/android/repository/commandlinetools-$OS_NAME-14742923_latest.zip" || exit 1
-mkdir -p cmdline-tools || exit 1
-unzip -qq "commandlinetools-$OS_NAME-14742923_latest.zip" -d cmdline-tools || exit 1
-rm "commandlinetools-$OS_NAME-14742923_latest.zip" || exit 1
-mv cmdline-tools/* cmdline-tools/latest/ || exit 1
+# echo "Downloading SDK Manager..."
+# mkdir -p "$ANDROID_SDK_ROOT" || exit 1
+# cd "$ANDROID_SDK_ROOT" || exit 1
+# $WGET "https://dl.google.com/android/repository/commandlinetools-$OS_NAME-14742923_latest.zip" || exit 1
+# mkdir -p cmdline-tools || exit 1
+# unzip -qq "commandlinetools-$OS_NAME-14742923_latest.zip" -d cmdline-tools || exit 1
+# rm "commandlinetools-$OS_NAME-14742923_latest.zip" || exit 1
+# mv cmdline-tools/* cmdline-tools/latest/ || exit 1
 
-echo "Installing required SDK tools..."
-cd cmdline-tools/latest/bin/ || exit 1
-yes | $SDKMANAGER --licenses >/dev/null || exit 1
-$SDKMANAGER --install "ndk;$ANDROID_NDK_VERSION" "cmake;$CMAKE_VERSION" "build-tools;$BUILD_TOOLS_VERSION" "platforms;android-36" > /dev/null || exit 1
+# echo "Installing required SDK tools..."
+# cd cmdline-tools/latest/bin/ || exit 1
+# yes | $SDKMANAGER --licenses >/dev/null || exit 1
+# $SDKMANAGER --install "ndk;$ANDROID_NDK_VERSION" "cmake;$CMAKE_VERSION" "build-tools;$BUILD_TOOLS_VERSION" "platforms;android-36" > /dev/null || exit 1
 
-cd ../../../
+# cd ../../../
 
 
 ### my stuff ###
 rm *.zip >/dev/null 2>&1
 echo "downloading sqlite3 amalgamation from: $sqliteUrl"
 $WGET "$sqliteUrl" || exit 1
-unzip -oqq *.zip || exit 1
-mv sqlite* build >/dev/null 2>&1 || mv *amalgamation* build >/dev/null 2>&1 
+unzip -qq "${sqliteUrl##*/}" -d build|| exit 1
+# mv sqlite* build >/dev/null 2>&1 || mv *amalgamation* build >/dev/null 2>&1 
 
 [ -e build ] || exit 1
 
