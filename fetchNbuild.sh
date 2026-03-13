@@ -102,15 +102,8 @@ yes | $SDKMANAGER --install "build-tools;$BUILD_TOOLS_VERSION" >/dev/null || exi
 echo "Installing Platform-35..."
 yes | $SDKMANAGER --install "platforms;android-35" > /dev/null || exit 1
 
-cd ../../../
+cd ../../../../
 
-
-echo "-------------- debug -------------------"
-echo "curr dir : $(pwd)"
-ls
-echo "list .."
-ls ..
-echo "-------------- debug -------------------"
 
 ##################### my stuff #####################
 rm *.zip >/dev/null 2>&1
